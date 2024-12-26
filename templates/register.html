@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register for Event</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+        }
+        label, input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Register for {{ event.name }}</h1>
+    <form action="/register/{{ event.id }}" method="POST">
+        <label for="participant_name">Your Name:</label>
+        <input type="text" id="participant_name" name="participant_name" required>
+
+        <label for="pickup_location">Pickup Location:</label>
+        <input type="text" id="pickup_location" name="pickup_location" required>
+
+        <button type="submit">Register</button>
+    </form>
+    <a href="/">Back to Home</a>
+</body>
+</html>
