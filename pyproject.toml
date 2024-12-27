@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "hatchling.build"
-requires = ["hatchling", "pdm-pep517"]
+requires = ["hatchling"]
 
 [project]
 authors = [
