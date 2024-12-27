@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: snowtrack
-    env: python
-    buildCommand: |
-      pip install hatch
-      hatch env create
-      hatch install
