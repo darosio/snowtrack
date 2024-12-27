@@ -1,13 +1,41 @@
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
-from models import Event, Participant, db
+from models import Event, Participant  # db
+
+# app = Flask(__name__)
+# app.config.from_object(Config)
+# db.init_app(app)
+# migrate = Migrate(app, db)
 
 app = Flask(__name__)
-app.config.from_object(Config)
-db.init_app(app)
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    "sqlite:///instance/local.db"  # Adjust if needed
+)
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+migrations_applied = False
+
+
+@app.before_request
+def apply_migrations():
+    global migrations_applied
+    if not migrations_applied:
+        from flask_migrate import upgrade
+
+        upgrade()
+        migrations_applied = True
+
+
+# @app.before_first_request
+# def apply_migrations():
+#     from flask_migrate import upgrade
+
+#     upgrade()
 
 
 @app.route("/")
@@ -43,6 +71,6 @@ def participate():
 
 
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
+    # with app.app_context():
+    #     db.create_all()
     app.run(debug=True)
