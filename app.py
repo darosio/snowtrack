@@ -1,4 +1,5 @@
 from flask import Flask, flash, redirect, render_template, request, url_for
+from flask_migrate import Migrate
 
 from config import Config
 from models import Event, Participant, db
@@ -6,6 +7,7 @@ from models import Event, Participant, db
 app = Flask(__name__)
 app.config.from_object(Config)
 db.init_app(app)
+migrate = Migrate(app, db)
 
 
 @app.route("/")
