@@ -1,9 +1,13 @@
+import os
+
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
 from models import Event, Participant  # db
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # app = Flask(__name__)
 # app.config.from_object(Config)
@@ -12,8 +16,11 @@ from models import Event, Participant  # db
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "sqlite:///instance/local.db"  # Adjust if needed
+    f"sqlite:///{os.path.join(BASE_DIR, 'instance/local.db')}"
 )
+# app.config["SQLALCHEMY_DATABASE_URI"] = (
+#     "sqlite:///instance/local.db"  # Adjust if needed
+# )
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
