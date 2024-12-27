@@ -1,52 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Details</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-    </style>
-</head>
-<body>
-    <h1>Event Details: {{ event.name }}</h1>
-    <p><strong>Date:</strong> {{ event.date }}</p>
-    <p><strong>Location:</strong> {{ event.location }}</p>
-    <h2>Participants</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Participant Name</th>
-                <th>Pickup Location</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for participant in participants %}
-            <tr>
-                <td>{{ participant.name }}</td>
-                <td>{{ participant.pickup_location }}</td>
-            </tr>
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Events</h1>
+<ul class="list-group">
+    {% for event in events %}
+    <li class="list-group-item">
+        <h5>{{ event.name }}</h5>
+        <ul>
+            {% for participant in event.participants %}
+            <li>{{ participant.pickup_location }}</li>
             {% else %}
-            <tr>
-                <td colspan="2">No participants registered yet.</td>
-            </tr>
+            <li>No participants yet.</li>
             {% endfor %}
-        </tbody>
-    </table>
-    <a href="/">Back to Home</a>
-</body>
-</html>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{{ url_for('create_event') }}" class="btn btn-primary mt-3">Create Event</a>
+<a href="{{ url_for('participate') }}" class="btn btn-success mt-3">Participate</a>
+{% endblock %}
