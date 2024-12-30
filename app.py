@@ -4,7 +4,6 @@ from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
-from config import Config
 from models import Event, Participant  # db
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))

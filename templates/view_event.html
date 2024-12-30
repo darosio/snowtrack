@@ -1,21 +1,23 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <h1>Events</h1>
 <ul class="list-group">
-    {% for event in events %}
-    <li class="list-group-item">
-        <h5>{{ event.name }}</h5>
-        <ul>
-            {% for participant in event.participants %}
-            <li>{{ participant.pickup_location }}</li>
-            {% else %}
-            <li>No participants yet.</li>
-            {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
+  {% for event in events %}
+  <li class="list-group-item">
+    <h5>{{ event.name }}</h5>
+    <ul>
+      {% for participant in event.participants %}
+      <li>{{ participant.pickup_location }}</li>
+      {% else %}
+      <li>No participants yet.</li>
+      {% endfor %}
+    </ul>
+  </li>
+  {% endfor %}
 </ul>
-<a href="{{ url_for('create_event') }}" class="btn btn-primary mt-3">Create Event</a>
-<a href="{{ url_for('participate') }}" class="btn btn-success mt-3">Participate</a>
+<a href="{{ url_for('create_event') }}" class="btn btn-primary mt-3"
+  >Create Event</a
+>
+<a href="{{ url_for('participate') }}" class="btn btn-success mt-3"
+  >Participate</a
+>
 {% endblock %}

@@ -1,21 +1,25 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <h1>Participate in an Event</h1>
 <form method="post">
-    <div class="mb-3">
-        <label for="event" class="form-label">Select Event</label>
-        <select id="event" name="event" class="form-select" required>
-            {% for event in events %}
-            <option value="{{ event.id }}">{{ event.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="mb-3">
-        <label for="pickup_location" class="form-label">Pickup Location</label>
-        <input type="text" id="pickup_location" name="pickup_location" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-success">Join</button>
+  <div class="mb-3">
+    <label for="event" class="form-label">Select Event</label>
+    <select id="event" name="event" class="form-select" required>
+      {% for event in events %}
+      <option value="{{ event.id }}">{{ event.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="pickup_location" class="form-label">Pickup Location</label>
+    <input
+      type="text"
+      id="pickup_location"
+      name="pickup_location"
+      class="form-control"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-success">Join</button>
 </form>
 <a href="{{ url_for('home') }}">Back to Home</a>
 {% endblock %}
